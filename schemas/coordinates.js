@@ -15,10 +15,10 @@ const CoordinateSchema = new mongoose.Schema({
         max: 99,
         unique: true
     },
-    users: [{
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }]
+    }
 });
 
 module.exports = mongoose.model("coordinates", CoordinateSchema);
