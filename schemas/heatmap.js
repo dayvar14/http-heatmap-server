@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const HeatmapSchema = new mongoose.Schema({
-    x: { type: Number, min: 0, max: 99 },
-    y: { type: Number, min: 0, max: 99 },
+    x: { type: Number, min: 0, max: 1000 },
+    y: { type: Number, min: 0, max: 1000 },
     count: {
         type: Number
     },
