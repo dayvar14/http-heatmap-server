@@ -11,7 +11,7 @@ const CoordinatesSchema = new mongoose.Schema({
     lastUpdate: {
         type: Date,
         default: Date.now,
-        expires: '10m'
+        expires: '5m',
     }
 });
 
