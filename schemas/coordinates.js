@@ -1,24 +1,19 @@
 const mongoose = require('mongoose');
 
-const CoordinateSchema = new mongoose.Schema({
-    x: {
-        type: Number,
+const CoordinatesSchema = new mongoose.Schema({
+    username: {
+        type: String,
         required: true,
-        min: 0,
-        max: 99,
         unique: true
     },
-    y: {
-        type: Number,
-        required: true,
-        min: 0,
-        max: 99,
-        unique: true
-    },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    x: { type: Number, min: 0, max: 99 },
+    y: { type: Number, min: 0, max: 99 },
+    lastUpdate: {
+        type: Date,
+        default: Date.now,
+        expires: '10m'
     }
 });
 
-module.exports = mongoose.model("coordinates", CoordinateSchema);
+CoordinatesSchema.index({ username:1 }, { "unique": true });
+module.exports = mongoose.model("coordinates", CoordinatesSchema);
