@@ -1,12 +1,12 @@
-#NEIU Heatmap 
+# NEIU Heatmap 
 
-##Dependencies
+## Dependencies
 
 Mongoose
 Express
 MongoDB
 
-###How to install
+### How to install
 Mongoose
 ```
 npm install mongoose
