@@ -1,12 +1,16 @@
 // Importing http core module
 const http = require('http');
+
 //Importing express framework
 const express = require('express');
 const app = express();
+
 //Request counter
 let counter = 0;
+
 //Creating map data structure 
 const map = new Map();
+
 //Setting the keys / values
 for(let i = 1; i <= 25; i++)
 {
@@ -20,6 +24,7 @@ app.get('/favicon.ico', (req, res) =>
 {   
     res.send('favicon request');
 });
+
 app.get('/', (req,res) =>
 {
     counter++;
@@ -30,6 +35,7 @@ app.get('/', (req,res) =>
     }
     console.log('Number of requests: ', counter);
 });
+
 app.get('/location/:id', (req, res) =>
 {    
     //If the url parameters include /location/ (id number)
