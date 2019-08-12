@@ -1,67 +1,59 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <style>
-        table 
-        {
-            border-collapse: collapse;
-            width:49%;
-        }
-        th
-        {
-            border:solid thin black;
-            width: 18%;
-            padding-bottom: 13%;
-            display: inline-block;
-        }
-        th:hover
-        {
-            opacity:0.5;
-        }
-        
-    </style>
-</head>
-
-<body>
-
-    <h1>Practice Map</h1>
-
-    <table>
-        <tr>
-            <th id="1">1</th>
-            <th id="2">2</th>
-            <th id="3">3</th>
-            <th id="4">4</th>
-            <th id="5">5</th>
-        </tr>
-        <tr>
-            <th id="6">6</th>
-            <th id="7">7</th>
-            <th id="8">8</th>
-            <th id="9">9</th>
-            <th>10</th>
-        </tr>
-        <tr>
-            <th id="11">11</th>
-            <th id="12">12</th>
-            <th id="13">13</th>
-            <th id="14">14</th>
-            <th id="15">15</th>
-        </tr>
-        <tr>
-            <th id="16">16</th>
-            <th id="17">17</th>
-            <th id="18">18</th>
-            <th id="19">19</th>
-            <th id="20">20</th>
-        </tr>
-        <tr>
-            <th id="21">21</th>
-            <th id="22">22</th>
-            <th id="23">23</th>
-            <th id="24">24</th>
-            <th id="25">25</th>
-        </tr>
-    </table>
-</body>
+ <head>
+  <title>Coordinate & Count Table</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ </head>
+ <body>
+  <div class="container">
+   <div class="table-responsive">
+    <h1 style ="text-align:center">Coordinate & Count Table</h1>
+    <br/>
+    <div style ="text-align:center">
+     <button type="button" name="load_data" id="load_data" class="btn btn-info">Load Data</button>
+    </div>
+    <br />
+    <div id="employee_table">
+    </div>
+   </div>
+  </div>
+ </body>
 </html>
+
+<script>
+$(document).ready(function(){
+ $('#load_data').click(function(){
+  $.ajax({
+   url:"./testing.csv",
+   dataType:"text",
+   success:function(data)
+   {
+    let employee_data = data.split(/\r?\n|\r/);
+    let table_data = '<table class="table table-bordered table-striped">';
+    for(let count = 0; count<employee_data.length; count++)
+    {
+     let cell_data = employee_data[count].split(",");
+     table_data += '<tr>';
+     for(let cell= 0; cell < cell_data.length; cell++)
+     {
+      if(count === 0)
+      {
+       table_data += '<th>'+cell_data[cell]+'</th>';
+      }
+      else
+      {
+       table_data += '<td>'+cell_data[cell]+'</td>';
+      }
+     }
+     table_data += '</tr>';
+    }
+    table_data += '</table>';
+    $('#employee_table').html(table_data);
+   }
+  });
+ });
+ 
+});
+</script>
