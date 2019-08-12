@@ -54,6 +54,11 @@ app.get('/location/:id', (req, res) =>
     console.log('Number of requests: ', counter);
 
 });
+app.get('/testing.csv', (req,res) =>
+{
+    res.sendFile('/Users/Luna/map/testing.csv');
+
+});
 
 // Variable PORT will take the value of PORT if it is available otherwise it'll use 4001
 const PORT = process.env.PORT || 4001;
