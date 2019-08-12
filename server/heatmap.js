@@ -1,15 +1,19 @@
+require('dotenv').config({path: __dirname + '/.env'});
+
 const Heatmap = require('../schemas/heatmap');
 const mongoose = require('mongoose');
 const Coordinates = require('../schemas/coordinates');
-const fs = require('fs');
+const delay = require('../delay')
+
+
 
 //Connects to HeatMap Database
-mongoose.connect('mongodb://localhost/NEIUHeatMap', { useNewUrlParser: true })
+mongoose.connect(process.env.DB_HOST
+    
+    
+    , { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB...'))
     .catch(err => console.error('Could not connect to MongoDB...', err));
-
-// delay between heatmap updates
-let delayBetweenUpdates = 1000000;
 
 //This function finds if a document contains the same key and then updates it with new data. If a document is not found,
 //a new one is created
@@ -27,24 +31,20 @@ async function updateHeatMap() {
 
         //From the Coordinates Table, result recieves the coordinates and 
         //stores the amount of duplicate coordinates in sum
-        /*const result = await Coordinates.aggregate([
+        const result = await Coordinates.aggregate([
             { "$group": { "_id": { x: "$x", y: "$y" }, "count": { "$sum": 1 } } }
-        ])*/
-        const result = await Heatmap.find({}).select("x y count").sort({ count:-1 }).lean();
-        for (key in result) {
-            array.push([result[key].x, result[key].y, result[key].count]);
-        }
+        ]);
+
         //This upserts the results in the Heatmap Table
         for (i = 0; i < result.length; i++) {
             try {
-                await upsert(Heatmap, { x: result[i]._id.x, y: result[i]._id.y }, { count: result[i].count, lastUpdate: new Date });
+                await upsert(Heatmap, { x: result[i].x, y: result[i].y }, { count: result[i].count, lastUpdate: new Date });
             }
             catch (ex) {
                 console.log(ex.message)
             }
         }
         console.log(result);
-        arrayToFile( array );
     }
     catch (ex) {
         console.log(ex.message);
@@ -71,20 +71,4 @@ async function main()
     }
 }
 
-function arrayToFile(array)
-{
-    var file = fs.createWriteStream('newFile.txt');
-    file.on('error', function(err) {  try { } catch(err) {console.log("Could not write to file.")} });
-    array.forEach(function(item) { file.write(item.join(',') + '\n'); });
-    file.end();
-}
-
-function delay(t, val) {
-    return new Promise(function(resolve) {
-        setTimeout(function() {
-            console.log("Updating")
-            resolve(val);
-        }, t);
-    });
- }
 main();
