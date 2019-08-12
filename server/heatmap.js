@@ -1,73 +1,58 @@
 require('dotenv').config({path: __dirname + '/.env'});
 
-const Heatmap = require('../schemas/heatmap');
 const mongoose = require('mongoose');
-const Coordinates = require('../schemas/coordinates');
+const Heatmap = require('../schemas/heatmap');
+const fs = require('fs');
 const delay = require('../delay')
 
-
-
-//Connects to HeatMap Database
-mongoose.connect(process.env.DB_HOST
-    
-    
-    , { useNewUrlParser: true })
+//Connects to Heatmap Database
+mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB...'))
     .catch(err => console.error('Could not connect to MongoDB...', err));
 
-//This function finds if a document contains the same key and then updates it with new data. If a document is not found,
-//a new one is created
-async function upsert(model, key, data) {
-    options = { upsert: true };
-    const result = await model.findOneAndUpdate(key, { $set: data }, options)
+//Grabs all Documents and saves
+async function recieveCoordinates() {
+    //Record 
+
+    let requestTime = new Date();
+    array = []
+    const result = await Heatmap.find({}).select("x y count").sort({ count:-1 }).lean();
+    
+
+    for (key in result) {
+        array.push([result[key].x, result[key].y, result[key].count]);
+    }
+    console.log(result);
+    //Records time elapsed between request and response
+    let responseTime = new Date();
+    let timeDifference = Math.ceil((responseTime.getTime() - requestTime.getTime()));
+    console.log( result);
+    //Prints to console the time it took to recieve coordinates
+    console.log("Recieved heatmap in " + timeDifference + "ms");
+    return array;
 }
-
-//Updates Heatmap with coordinates from the Coordinates Table
-async function updateHeatMap() {
-
-    let startTime = new Date()
-    array = [];
-    try {
-
-        //From the Coordinates Table, result recieves the coordinates and 
-        //stores the amount of duplicate coordinates in sum
-        const result = await Coordinates.aggregate([
-            { "$group": { "_id": { x: "$x", y: "$y" }, "count": { "$sum": 1 } } }
-        ]);
-
-        //This upserts the results in the Heatmap Table
-        for (i = 0; i < result.length; i++) {
-            try {
-                await upsert(Heatmap, { x: result[i].x, y: result[i].y }, { count: result[i].count, lastUpdate: new Date });
-            }
-            catch (ex) {
-                console.log(ex.message)
-            }
-        }
-        console.log(result);
-    }
-    catch (ex) {
-        console.log(ex.message);
-    }
-
-    let endTime = new Date();
-    let timeDifference = Math.ceil((endTime.getTime() - startTime.getTime()));
-    console.log("Updated Heatmap in "+ timeDifference +"ms");
+//Writes Array to file
+function arrayToFile(array)
+{
+    var file = fs.createWriteStream('map_content.txt');
+    file.on('error', function(err) {  try { } catch(err) {console.log("Could not write to file.")} });
+    array.forEach(function(item) { file.write(item.join(',') + '\n'); });
+    file.end();
 }
 
 async function main()
 {
-    try
-    {
+    try{
         while(true)
         {
-            await updateHeatMap();
-            await delay(2000);
+            heatmapArray = await recieveCoordinates();
+            arrayToFile(heatmapArray);
+            await delay(process.env.UPDATE_HEATMAP_DELAY)
         }
     }
     catch(ex)
     {
-        console.log(ex.message);
+        console.log(ex.message)
     }
 }
 
