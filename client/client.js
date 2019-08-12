@@ -39,7 +39,7 @@ async function upsert(model, data, updatedData) {
     const result = await model.findOneAndUpdate(data, { $set: updatedData }, options)
 }
 
-
+/*
 async function add(model) {
     try {
         const result = await model.save();
@@ -60,8 +60,30 @@ async function findDistinctCoordinates() {
     ])
     return result;
 }
-
-upsert(Coordinates, {username: "rachel"}, {x: 20, y:90, lastUpdate:new Date});
-upsert(Coordinates, {username: "dayvar14"}, {x: 10, y:80, lastUpdate:new Date});
-upsert(Coordinates, {username: "mmboy"}, {x: 10, y:40, lastUpdate:new Date});
-upsert(Coordinates, {username: "adam14"}, {x: 20, y:10, lastUpdate:new Date});
+*/
+async function main()
+{
+    try{
+        while(true)
+        {
+            await upsert(Coordinates, {username: "rachel"}, {x: 20, y:90, lastUpdate:new Date});
+            await upsert(Coordinates, {username: "dayvar14"}, {x: 10, y:80, lastUpdate:new Date});
+            await upsert(Coordinates, {username: "mmboy"}, {x: 10, y:40, lastUpdate:new Date});
+            await upsert(Coordinates, {username: "adam14"}, {x: 20, y:10, lastUpdate:new Date});
+            await delay(3000);
+        }
+    }
+    catch(ex)
+    {
+        console.log(ex.message);
+    }
+}
+function delay(t, val) {
+    return new Promise(function(resolve) {
+        setTimeout(function() {
+            console.log("Updating")
+            resolve(val);
+        }, t);
+    });
+ }
+main();
