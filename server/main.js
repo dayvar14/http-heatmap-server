@@ -11,7 +11,7 @@ let counter = 0;
 //Creating map data structure 
 const map = new Map();
 
-//Setting the keys / values
+//Setting the keys values
 for(let i = 1; i <= 25; i++)
 {
     map.set('' + i, 0);

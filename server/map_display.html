@@ -1,7 +1,26 @@
 <!DOCTYPE html>
 <html>
  <head>
+        <style>
+                table 
+                {
+                    border-collapse: collapse;
+                    width:49%;
+                }
+                th
+                {
+                    border:solid thin black;
+                    width: 18%;
+                    padding-bottom: 13%;
+                    display: inline-block;
+                }
+                th:hover
+                {
+                    opacity:0.5;
+                }
+            </style>
   <title>Coordinate & Count Table</title>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -19,6 +38,8 @@
     </div>
    </div>
   </div>
+  
+</table>
  </body>
 </html>
 
@@ -26,10 +47,13 @@
 $(document).ready(function(){
  $('#load_data').click(function(){
   $.ajax({
-   url:"./testing.csv",
+   //url:"./map_content.csv",
+   url:"./testing.csv", 
    dataType:"text",
    success:function(data)
    {
+
+    /* start of working code
     let employee_data = data.split(/\r?\n|\r/);
     let table_data = '<table class="table table-bordered table-striped">';
     for(let count = 0; count<employee_data.length; count++)
@@ -51,6 +75,36 @@ $(document).ready(function(){
     }
     table_data += '</table>';
     $('#employee_table').html(table_data);
+    end of working code*/
+
+
+
+
+
+    let employee_data = data.split(/\r?\n|\r/);
+    let table_data = '<table class="table table-bordered table-striped">';
+    for(let count = 0; count<employee_data.length; count++)
+    {
+     let cell_data = employee_data[count].split(",");
+     table_data += '<tr>';
+     for(let cell= 0; cell < cell_data.length; cell++)
+     {
+      if(count === 0)
+      {
+       table_data += '<td>'+cell_data[cell]+'</td>';
+      }
+      else
+      {
+       table_data += '<td>'+cell_data[cell]+'</td>';
+      }
+     }
+     table_data += '</tr>';
+    }
+    table_data += '</table>';
+    $('#employee_table').html(table_data);
+
+
+
    }
   });
  });
