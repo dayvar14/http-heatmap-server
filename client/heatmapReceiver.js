@@ -14,7 +14,7 @@ mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
 async function recieveCoordinates() {
     //Record 
 
-    let requestTime = new Date();
+    let startTime = process.hrtime()
     array = []
     const result = await Heatmap.find({}).select("x y count").sort({ count:-1 }).lean();
     
@@ -22,16 +22,14 @@ async function recieveCoordinates() {
     for (key in result) {
         array.push([result[key].x, result[key].y, result[key].count]);
     }
-
+    console.log(result);
     //Records time elapsed between request and response
-    let responseTime = new Date();
-    let timeDifference = Math.ceil((responseTime.getTime() - requestTime.getTime()));
-
+    let endTime = process.hrtime(startTime)
+    console.log( result);
     //Prints to console the time it took to recieve coordinates
-    console.log("Recieved heatmap in " + timeDifference + "ms");
+    console.log("Recieved heatmap in " + endTime[1]/ 1000000 + "ms");
     return array;
 }
-
 //Writes Array to file
 function arrayToFile(array)
 {
@@ -48,7 +46,7 @@ async function main()
         {
             heatmapArray = await recieveCoordinates();
             arrayToFile(heatmapArray);
-            await delay(process.env.UPDATE_HEATMAP_DELAY)
+            await delay(process.env.DELAY_BETWEEN_UPDATES)
         }
     }
     catch(ex)

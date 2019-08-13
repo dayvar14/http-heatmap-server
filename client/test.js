@@ -10,23 +10,23 @@ mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
     .catch(err => console.error('Could not connect to MongoDB...', err));
 
 //Database
-async function upsert(model, data, updatedData) {
+async function upsert(model, key, data) {
     options = { upsert: true };
-    const result = await model.findOneAndUpdate(data, { $set: updatedData }, options)
+    const result = await model.findOneAndUpdate(key, { $set: data }, options)
 }
+
 ///Test Clients
 
 async function createTestUsers()
 {
     users = [];
-    for (i = 0; i < users.length; i++){
+    for (i = 0; i < process.env.TEST_USER_AMOUNT; i++){
         const user = new User({
             username: 'User'+i,
             firstName: 'firstName'+i,
-            lastName: 'lastName'
+            lastName: 'lastName'+i
         });
         users.push(user);
-        console.log(user)
     }
     return users;
 }
@@ -37,11 +37,13 @@ async function main()
 {
     try{
         users = await createTestUsers();
-        console.log(users);
         while(true)
         {
-            for( user in users){
-                await upsert(Coordinates, user.username, {x:Math.floor(Math.random()*maxCoordinate), y:Math.floor(Math.random()*maxCoordinate), lastUpdate:new Date});
+            for( let i = 0; i < users.length; i++){
+                let user = users[i];
+                let userx = Math.floor(Math.random()*process.env.MAX_X);
+                let usery = Math.floor(Math.random()*process.env.MAX_Y);
+                await upsert(Coordinates, {username: user.username}, {x: userx, y: usery, lastUpdate: new Date});
             }
 
             await delay(process.env.DELAY_BETWEEN_UPDATES);

@@ -8,10 +8,7 @@ const delay = require('../delay')
 
 
 //Connects to HeatMap Database
-mongoose.connect(process.env.DB_HOST
-    
-    
-    , { useNewUrlParser: true })
+mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB...'))
     .catch(err => console.error('Could not connect to MongoDB...', err));
 
@@ -25,7 +22,7 @@ async function upsert(model, key, data) {
 //Updates Heatmap with coordinates from the Coordinates Table
 async function updateHeatMap() {
 
-    let startTime = new Date()
+    let startTime = process.hrtime()
     array = [];
     try {
 
@@ -34,25 +31,23 @@ async function updateHeatMap() {
         const result = await Coordinates.aggregate([
             { "$group": { "_id": { x: "$x", y: "$y" }, "count": { "$sum": 1 } } }
         ]);
-
+        console.log(result);
         //This upserts the results in the Heatmap Table
         for (i = 0; i < result.length; i++) {
             try {
-                await upsert(Heatmap, { x: result[i].x, y: result[i].y }, { count: result[i].count, lastUpdate: new Date });
+                await upsert(Heatmap, { x: result[i]._id.x, y: result[i]._id.y }, { count: result[i].count, lastUpdate: new Date });
             }
             catch (ex) {
                 console.log(ex.message)
             }
         }
-        console.log(result);
     }
     catch (ex) {
         console.log(ex.message);
     }
 
-    let endTime = new Date();
-    let timeDifference = Math.ceil((endTime.getTime() - startTime.getTime()));
-    console.log("Updated Heatmap in "+ timeDifference +"ms");
+    let endTime = process.hrtime(startTime)
+    console.log("Updated Heatmap in "+ endTime[1]/ 1000000 +"ms");
 }
 
 async function main()
