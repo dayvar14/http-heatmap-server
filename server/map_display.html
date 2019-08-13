@@ -58,7 +58,6 @@
 $(document).ready(function(){
  $('#load_data').click(function(){
   $.ajax({
-<<<<<<< HEAD
    //url:"./map_content.csv",
    url:"./testing.csv", 
    dataType:"text",
@@ -93,35 +92,7 @@ $(document).ready(function(){
 
 
 
-    let employee_data = data.split(/\r?\n|\r/);
-    let table_data = '<table class="table table-bordered table-striped">';
-    for(let count = 0; count<employee_data.length; count++)
-    {
-     let cell_data = employee_data[count].split(",");
-     table_data += '<tr>';
-     for(let cell= 0; cell < cell_data.length; cell++)
-     {
-      if(count === 0)
-      {
-       table_data += '<td>'+cell_data[cell]+'</td>';
-      }
-      else
-      {
-       table_data += '<td>'+cell_data[cell]+'</td>';
-      }
-     }
-     table_data += '</tr>';
-    }
-    table_data += '</table>';
-    $('#employee_table').html(table_data);
 
-
-
-=======
-   url:"./map_content.csv",
-   dataType:"text",
-   success:function(data)
-   {
        let coordinate_data = data.split(/\r?\n|\r/);
        for( var i = 0; i < coordinate_data.length; i++)
        {
@@ -144,7 +115,6 @@ $(document).ready(function(){
            }
            
        }
->>>>>>> fdb779141fd8bfdc65889e36ac4dcfbe2503e467
    }
   });
  });
