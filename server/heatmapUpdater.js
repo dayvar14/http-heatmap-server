@@ -22,7 +22,7 @@ async function upsert(model, key, data) {
 //Updates Heatmap with coordinates from the Coordinates Table
 async function updateHeatMap() {
 
-    let startTime = new Date()
+    let startTime = process.hrtime()
     array = [];
     try {
 
@@ -46,9 +46,8 @@ async function updateHeatMap() {
         console.log(ex.message);
     }
 
-    let endTime = new Date();
-    let timeDifference = Math.ceil((endTime.getTime() - startTime.getTime()));
-    console.log("Updated Heatmap in "+ timeDifference +"ms");
+    let endTime = process.hrtime(startTime)
+    console.log("Updated Heatmap in "+ endTime[1]/ 1000000 +"ms");
 }
 
 async function main()
