@@ -56,12 +56,12 @@ app.get('/location/:id', (req, res) =>
 });
 app.get('/map_content.csv', (req,res) =>
 {
-    res.sendFile('/Users/Luna/map/map_content.csv');
+    res.sendFile(__dirname +'/map_content.csv');
 
 });
 
 // Variable PORT will take the value of PORT if it is available otherwise it'll use 4001
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.DB_HOST || 4001;
 
 // Setting the variable to listen for incoming requests by using the listen method of myServer
 app.listen(PORT);
