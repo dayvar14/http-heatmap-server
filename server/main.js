@@ -54,9 +54,9 @@ app.get('/location/:id', (req, res) =>
     console.log('Number of requests: ', counter);
 
 });
-app.get('/testing.csv', (req,res) =>
+app.get('/map_content.csv', (req,res) =>
 {
-    res.sendFile('/Users/Luna/map/testing.csv');
+    res.sendFile('/Users/Luna/map/map_content.csv');
 
 });
 
