@@ -36,16 +36,19 @@ app.get('/', (req,res) =>
     console.log('Number of requests: ', counter);
 });
 
-app.get('/location/:id', (req, res) =>
+app.get('/location/id="a",LAG="45",LAT="67"', (req, res) =>
 {    
     //If the url parameters include /location/ (id number)
     //it'll enter and update the map key value corresponding
     //to the id
     counter++;
     res.sendFile('./map_display.html',{root: __dirname });
-    let location = req.params.id;
+    let id = req.params.id;
+    let x = req.params.LAG;
+    let y = req.params.LAT;
     let mVal = map.get( '' + location) + 1;
     let updateMap = map.set('' + location, mVal);
+    await upsert(Coordinates, {username: id}, {x: x, y: y, lastUpdate: new Date});
 
     for (const [k, v] of map.entries()) 
     {

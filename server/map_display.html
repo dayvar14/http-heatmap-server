@@ -22,7 +22,6 @@
   <title>Coordinate & Count Table</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </script>
  </head>
@@ -34,7 +33,21 @@
     <div style ="text-align:center">
      <button type="button" name="load_data" id="load_data" class="btn btn-info">Load Data</button>
     <br />
-    <div id="heatmap" onload="loadHeatmapTemplate()"></div>
+    <div id="heatmap">
+        <script>
+                var container = document.getElementById('heatmap');
+                for (var i = 0; i < 100; i++) {
+                    for (var j = 0; j < 100; j++) {
+                        let cell = document.createElement('div');
+                        cell.id = i + 'x' + j;
+                        cell.style = 'width:10px;height:10px;display: inline-block;margin:0;';
+                        container.appendChild(cell);
+                    }
+
+                    container.appendChild(document.createElement('br'));
+                }
+            </script>
+    </div>
     </div>
    </div>
   </div>
@@ -44,17 +57,6 @@
 </html>
 
 <script>
-    function loadHeatmapTemplate(){
-        let html = "";
-        for (var i = 0; i < 100; i++) {
-            for (var j = 0; i < 100; i++) {
-                html += '<div style="width:10px,height:10px,color:black" id="'+j+'x'+i+'"></div>';
-            }
-            var container = document.getElementById("heatmap");
-            container.innerHTML = html;
-        }
-    }
-    
 $(document).ready(function(){
  $('#load_data').click(function(){
   $.ajax({
@@ -97,19 +99,20 @@ $(document).ready(function(){
        for( var i = 0; i < coordinate_data.length; i++)
        {
            let user = coordinate_data[i].split(',');
-           let userx = coordinate_data[1];
-           let usery = coordinate_data[0];
-           let count = coordinate_data[2];
+           let usery = user[1];
+           let userx = user[0];
+           let count = parseInt(user[2],10);
+           console.log(userx+'x'+usery);
            let div = document.getElementById(userx+'x'+usery);
-           if( count < 5 && count >= 0)
+           if( count < 3 && count >= 0)
            {
             div.style.backgroundColor = "green";
            }
-           if( count < 10 && count >= 5)
+           if( count < 6 && count >= 3)
            {
             div.style.backgroundColor = "yellow";
            }
-           if(count >= 10)
+           if(count >= 6)
            {
             div.style.backgroundColor = "red";
            }
