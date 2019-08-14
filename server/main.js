@@ -36,14 +36,17 @@ app.get('/', (req,res) =>
     console.log('Number of requests: ', counter);
 });
 
-app.get('/location/:id', (req, res) =>
+app.get('/location/:id, LONG, LANG', (req, res) =>
 {    
     //If the url parameters include /location/ (id number)
     //it'll enter and update the map key value corresponding
     //to the id
     counter++;
     res.sendFile('./map_display.html',{root: __dirname });
-    let location = req.params.id;
+    let id = req.params.id;
+    let x = req.params.LONG;
+    let y = req.params.LANG;
+
     let mVal = map.get( '' + location) + 1;
     let updateMap = map.set('' + location, mVal);
 
@@ -54,9 +57,9 @@ app.get('/location/:id', (req, res) =>
     console.log('Number of requests: ', counter);
 
 });
-app.get('/map_content.csv', (req,res) =>
+app.get('/testing.csv', (req,res) =>
 {
-    res.sendFile(__dirname +'/map_content.csv');
+    res.sendFile('./testing.csv', {root: __dirname });
 
 });
 
