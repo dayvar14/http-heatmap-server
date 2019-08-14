@@ -33,7 +33,7 @@ async function recieveCoordinates() {
 //Writes Array to file
 function arrayToFile(array)
 {
-    var file = fs.createWriteStream('map_content.txt');
+    var file = fs.createWriteStream('map_content.csv');
     file.on('error', function(err) {  try { } catch(err) {console.log("Could not write to file.")} });
     array.forEach(function(item) { file.write(item.join(',') + '\n'); });
     file.end();

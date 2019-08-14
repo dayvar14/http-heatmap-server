@@ -21,7 +21,6 @@
             </style>
   <title>Coordinate & Count Table</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
  </head>
@@ -33,15 +32,35 @@
     <br/>
     <div style ="text-align:center">
      <button type="button" name="load_data" id="load_data" class="btn btn-info">Load Data</button>
+<<<<<<< HEAD
     </div>
     <br/>
     <div id="employee_table" onload="makeDivs()"></div>
+=======
+    <br />
+    <div id="heatmap">
+        <script>
+                var container = document.getElementById('heatmap');
+                for (var i = 0; i < 100; i++) {
+                    for (var j = 0; j < 100; j++) {
+                        let cell = document.createElement('div');
+                        cell.id = i + 'x' + j;
+                        cell.style = 'width:10px;height:10px;display: inline-block;margin:0;';
+                        container.appendChild(cell);
+                    }
+
+                    container.appendChild(document.createElement('br'));
+                }
+            </script>
+    </div>
+>>>>>>> 3bcb30152a74780f9eeb7fa3614375d5fc2f1370
     </div>
    </div>
  </body>
 </html>
 
 <script>
+<<<<<<< HEAD
 $(document).ready(function makeDivs(){
 
     //parent element
@@ -59,6 +78,8 @@ $(document).ready(function makeDivs(){
     myEmpTable.innerHTML = grid;
 });
 
+=======
+>>>>>>> 3bcb30152a74780f9eeb7fa3614375d5fc2f1370
 $(document).ready(function(){
  $('#load_data').click(function(){
   $.ajax({
@@ -99,6 +120,32 @@ $(document).ready(function(){
     $('#employee_table').html(table_data);
     //end of working code
 
+<<<<<<< HEAD
+=======
+       let coordinate_data = data.split(/\r?\n|\r/);
+       for( var i = 0; i < coordinate_data.length; i++)
+       {
+           let user = coordinate_data[i].split(',');
+           let usery = user[1];
+           let userx = user[0];
+           let count = parseInt(user[2],10);
+           console.log(userx+'x'+usery);
+           let div = document.getElementById(userx+'x'+usery);
+           if( count < 3 && count >= 0)
+           {
+            div.style.backgroundColor = "green";
+           }
+           if( count < 6 && count >= 3)
+           {
+            div.style.backgroundColor = "yellow";
+           }
+           if(count >= 6)
+           {
+            div.style.backgroundColor = "red";
+           }
+           
+       }
+>>>>>>> 3bcb30152a74780f9eeb7fa3614375d5fc2f1370
    }
   });
  });
