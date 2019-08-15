@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
 const CoordinatesSchema = new mongoose.Schema({
@@ -11,7 +12,7 @@ const CoordinatesSchema = new mongoose.Schema({
     lastUpdate: {
         type: Date,
         default: Date.now,
-        expires: '5m',
+        expires: process.env.COORDINATE_EXPIRE_TIME,
     }
 });
 

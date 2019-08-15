@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
 const HeatmapSchema = new mongoose.Schema({
@@ -9,7 +10,7 @@ const HeatmapSchema = new mongoose.Schema({
     lastUpdate: {
         type: Date,
         default: Date.now,
-        expires: '5m'
+        expires: process.env.HEATMAP_EXPIRE_TIME
     }
 });
 

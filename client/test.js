@@ -1,22 +1,18 @@
-require('dotenv').config({path: __dirname + '/.env'});
+require('dotenv').config();
+require('dotenv').config({path: __dirname + '/client.env'});
 
 const mongoose = require('mongoose');
 const User = require('../schemas/user');
 const Coordinates = require('../schemas/coordinates');
 const delay = require('../delay');
+const query = require('../query');
 
 mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB...'))
     .catch(err => console.error('Could not connect to MongoDB...', err));
 
-//Database
-async function upsert(model, key, data) {
-    options = { upsert: true };
-    const result = await model.findOneAndUpdate(key, { $set: data }, options)
-}
 
-///Test Clients
-
+//Creates TEST_USER_AMOUNT of users with random coordinates
 async function createTestUsers()
 {
     users = [];
@@ -43,7 +39,7 @@ async function main()
                 let user = users[i];
                 let userx = Math.floor(Math.random()*process.env.MAX_X);
                 let usery = Math.floor(Math.random()*process.env.MAX_Y);
-                await upsert(Coordinates, {username: user.username}, {x: userx, y: usery, lastUpdate: new Date});
+                await query.upsert(Coordinates, {username: user.username}, {x: userx, y: usery, lastUpdate: new Date});
             }
 
             await delay(process.env.DELAY_BETWEEN_UPDATES);

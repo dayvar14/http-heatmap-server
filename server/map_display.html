@@ -18,13 +18,19 @@
                 {
                     opacity:0.5;
                 }
+                .heatmap
+                {
+                    width:500px;
+                    margin-left: auto;
+                    margin-right:auto;
+                }
             </style>
   <title>Coordinate & Count Table</title>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+  </script>
  </head>
-
  <body>
   <div class="container">
    <div class="table-responsive">
@@ -32,96 +38,36 @@
     <br/>
     <div style ="text-align:center">
      <button type="button" name="load_data" id="load_data" class="btn btn-info">Load Data</button>
-<<<<<<< HEAD
-    </div>
-    <br/>
-    <div id="employee_table" onload="makeDivs()"></div>
-=======
     <br />
-    <div id="heatmap">
+    <div id="heatmap" class="heatmap">
         <script>
                 var container = document.getElementById('heatmap');
                 for (var i = 0; i < 100; i++) {
                     for (var j = 0; j < 100; j++) {
                         let cell = document.createElement('div');
                         cell.id = i + 'x' + j;
-                        cell.style = 'width:10px;height:10px;display: inline-block;margin:0;';
+                        cell.style = 'width:5px;height:5px;float:left;margin-top:0px;margin-bottom:0px;';
                         container.appendChild(cell);
                     }
-
-                    container.appendChild(document.createElement('br'));
                 }
             </script>
     </div>
->>>>>>> 3bcb30152a74780f9eeb7fa3614375d5fc2f1370
     </div>
    </div>
+  </div>
+  
+</table>
  </body>
 </html>
 
 <script>
-<<<<<<< HEAD
-$(document).ready(function makeDivs(){
-
-    //parent element
-    const myEmpTable = document.getElementById("employee_table");
-    //new div 
-    let grid = "";
-    for(let x = 0; x < 100; x++)
-    {
-        for(let y = 0; y < 100; y++)
-        {
-            grid += '<div style="width:10px,height:10px,color:black" id="'+y+'x'+x+'"></div>';
-        }
-        console.log(grid);
-    }
-    myEmpTable.innerHTML = grid;
-});
-
-=======
->>>>>>> 3bcb30152a74780f9eeb7fa3614375d5fc2f1370
 $(document).ready(function(){
  $('#load_data').click(function(){
   $.ajax({
-   //url:"./map_content.csv",
-   url:"./testing.csv", 
+   url:"./map_content.csv",
    dataType:"text",
    success:function(data)
    {
-
-    //start of working code
-    let employee_data = data.split(/\r?\n|\r/);
-    let table_data = '<table class="table table-bordered table-striped">';
-    for(let x = 0; x < employee_data.length; x++)
-    {
-     let cell_data = employee_data[x].split(",");
-     let xVal = cell_data[0];
-     let yVal = cell_data[1];
-     table_data += '<tr>';
-     for(let y = 0; y < cell_data.length; y++)
-     {
-      if(x === 0)
-      {
-       table_data += '<td>'+cell_data[y]+'</td>';
-      }
-      else
-      {
-       table_data += '<td>'+cell_data[y]+'</td>';
-      }
-     }
-     table_data += '</tr>';
-    }
-    table_data += '</table>';
-
-
-
-
-
-    $('#employee_table').html(table_data);
-    //end of working code
-
-<<<<<<< HEAD
-=======
        let coordinate_data = data.split(/\r?\n|\r/);
        for( var i = 0; i < coordinate_data.length; i++)
        {
@@ -145,7 +91,6 @@ $(document).ready(function(){
            }
            
        }
->>>>>>> 3bcb30152a74780f9eeb7fa3614375d5fc2f1370
    }
   });
  });
