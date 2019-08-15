@@ -4,8 +4,8 @@ const fs = require('fs');
 const Heatmap = require('../schemas/heatmap');
 const mongoose = require('mongoose');
 const Coordinates = require('../schemas/coordinates');
-const delay = require('../delay');
-const query = require('../query');
+const delay = require('../lib/delay');
+const query = require('../lib/query');
 
 //Updates Heatmap with coordinates from the Coordinates Table then writes the coordinates
 //to a csv file
@@ -79,3 +79,5 @@ async function run()
         console.log(ex.message);
     }
 }
+
+run();

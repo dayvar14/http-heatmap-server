@@ -7,8 +7,8 @@ const CoordinatesSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    x: { type: Number, min: 0, max: 1000 },
-    y: { type: Number, min: 0, max: 1000 },
+    x: { type: Number, min: process.env.HEATMAP_MIN_X, max: process.env.HEATMAP_MAX_X },
+    y: { type: Number, min: process.env.HEATMAP_MIN_Y, max: process.env.HEATMAP_MAX_Y },
     lastUpdate: {
         type: Date,
         default: Date.now,

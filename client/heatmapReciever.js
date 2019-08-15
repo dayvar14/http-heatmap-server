@@ -3,7 +3,7 @@ require('dotenv').config({path: __dirname + '/.env'});
 
 const mongoose = require('mongoose');
 const Heatmap = require('../schemas/heatmap');
-const delay = require('../delay');
+const delay = require('../lib/delay');
 
 //Connects to Heatmap Database
 mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })

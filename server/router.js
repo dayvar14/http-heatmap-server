@@ -8,7 +8,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const Coordinates = require('../schemas/coordinates');
-const query = require('../query');
+const query = require('../lib/query');
 
 //app.get uses the express framework to check url request
 //depending on the one it enters

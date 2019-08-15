@@ -4,8 +4,8 @@ require('dotenv').config({path: __dirname + '/client.env'});
 const mongoose = require('mongoose');
 const User = require('../schemas/user');
 const Coordinates = require('../schemas/coordinates');
-const delay = require('../delay');
-const query = require('../query');
+const delay = require('../lib/delay');
+const query = require('../lib/query');
 
 mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
     .then(() => console.log('Connected to MongoDB...'))
