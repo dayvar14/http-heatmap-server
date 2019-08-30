@@ -26,7 +26,6 @@ async function updateHeatMap() {
         const result = await Coordinates.aggregate([
             { "$group": { "_id": { x: "$x", y: "$y" }, "count": { "$sum": 1 } } }
         ]);
-        console.log(result);
 
         //This upserts the results in the Heatmap Table
         for (i = 0; i < result.length; i++) {
@@ -43,6 +42,7 @@ async function updateHeatMap() {
         for (key in result) {
             coordinateArray.push([result[key]._id.x, result[key]._id.y, result[key].count]);
         }
+        console.log(coordinateArray);
         arrayToFile(coordinateArray, 'map_content.csv');
 
     }

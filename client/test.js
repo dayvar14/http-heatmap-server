@@ -29,7 +29,7 @@ async function createTestUsers()
 
 
 
-async function main()
+async function run()
 {
     try{
         users = await createTestUsers();
@@ -50,5 +50,3 @@ async function main()
         console.log(ex.message);
     }
 }
-
-main();

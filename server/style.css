@@ -1,0 +1,22 @@
+table 
+{
+    border-collapse: collapse;
+    width:49%;
+}
+th
+{
+    border:solid thin black;
+    width: 18%;
+    padding-bottom: 13%;
+    display: inline-block;
+}
+th:hover
+{
+    opacity:0.5;
+}
+.heatmap_container
+{
+    width:500px;
+    margin-left: auto;
+    margin-right:auto;
+}

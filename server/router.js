@@ -55,7 +55,6 @@ app.get('/map_content.csv', (req,res) =>
     res.sendFile('./map_content.csv', {root: __dirname });
 
 });
-
 // Variable PORT will take the value of PORT if it is available otherwise it'll use 4001
 const PORT = process.env.SERVER_PORT || 4001;
 
