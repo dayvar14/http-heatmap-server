@@ -54,7 +54,6 @@ The client side development involved the use of HTML markup language and the boo
 
 | File | Function |
 | --- | --- |
-
 | Index | Utilizes Node.js and Express to route users. Listens for incoming requests and sends back a response |
 | HeatmapUpdater | Updates table based on data in MongoDB data into frontend |
 
