@@ -1,4 +1,4 @@
-**NEIU MeetUp Documentation**
+*NEIU MeetUp Documentation*
 
 **Background**
 
@@ -42,13 +42,7 @@ Dynamic representation of population density depends on the continuous connectio
 
 **Organization**
 
-Project implementation involved its division into two parts, the Front-end and backend side.
-
-The server side involved the development of a functioning server through the combination of
-
-programming techniques (javascript programming language, express framework, and NodeJS run-time environment) and schema-less database technologies (MongoDB database and mongoose javascript library facilitated the management of dynamic data).
-
-The client side development involved the use of HTML markup language and the bootstrap framework to present the webpage elements that constructed the heat map.
+Project implementation involved its division into two parts, the Front-end and backend side. The server side involved the development of a functioning server through the combination of programming techniques (javascript programming language, express framework, and NodeJS run-time environment) and schema-less database technologies (MongoDB database and mongoose javascript library facilitated the management of dynamic data). The client side development involved the use of HTML markup language and the bootstrap framework to present the webpage elements that constructed the heat map.
 
 **Server**
 
