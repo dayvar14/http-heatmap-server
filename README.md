@@ -2,9 +2,7 @@
 
 **Background**
 
-Northeastern Illinois University (NEIU) is a Chicago Public University with a total student enrollment of nearly 8000 students. Currently, students aren&#39;t able to easily locate information about school activities or events. While events are advertised on the school email (NMail) and bulletin boards, many students overlook these sources. A mobile application will help keep students up to date with an easy-to-use interface that displays current events on-campus.
-
-The goal is to encourage new students and old students to become more active on-campus.
+Northeastern Illinois University (NEIU) is a Chicago Public University with a total student enrollment of nearly 8000 students. Currently, students aren&#39;t able to easily locate information about school activities or events. While events are advertised on the school email (NMail) and bulletin boards, many students overlook these sources. A mobile application will help keep students up to date with an easy-to-use interface that displays current events on-campus. The goal is to encourage new students and old students to become more active on-campus.
 
 **Vision**
 
@@ -20,7 +18,7 @@ The NEIU MeetUp mobile application will allow students to easily access informat
 
 **Planned Features**
 
-- Social aspect that allows students to share and create school events
+- Social aspect that allows authorized students create school events
 - Social aspect that allows students to share which events they are participating in
 - Interactable Map that allows students to find nearby events
 - Notify students of their preferred set of school activities
