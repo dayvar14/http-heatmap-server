@@ -43,20 +43,15 @@ Dynamic representation of population density depends on the continuous connectio
 Project implementation involved its division into two parts, the Front-end and backend side. The server side involved the development of a functioning server through the combination of programming techniques (javascript programming language, express framework, and NodeJS run-time environment) and schema-less database technologies (MongoDB database and mongoose javascript library facilitated the management of dynamic data). The client side development involved the use of HTML markup language and the bootstrap framework to present the webpage elements that constructed the heat map.
 
 **Server**
-
-| File | Function |
-| --- | --- |
-| Index | Utilizes Node.js and Express to route users. Listens for incoming requests and sends back a response |
-| HeatmapUpdater | Updates table based on data in MongoDB data into frontend |
-
-
-
+Work in Progress
 
 
 **Database**
+Work in Progress
 
 We used MongoDB, a schema-less database to store map coordinates and their corresponding count which, represented the number of individuals at a particular location. Mongoose, a library used to translate information between our run-time environment and our database was used conjunction with MongoDB to to facilitate object representation between NodeJS and MongoDB. The stored information in MongoDB was then retrieved and used to represent the data onto the heat map . NodeJS, a javascript run-time environment was used to develop our server which, listened for incoming requests and reacted accordingly by returning a corresponding response based on the request to the client.
 
 **Mobile Application**
+Work in Progress
 
  The client side involved the development of an Android-based application (that resides the student&#39;s smartphone), where using such application - the client creates an initial connection with the server and sends a request that involved (e.g., current location, user&#39;s profile and preferences, ....)
