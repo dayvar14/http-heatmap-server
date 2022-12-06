@@ -21,7 +21,7 @@
   "homepage": "https://github.com/dayvar14/neiu-heatmap-app#readme",
   "dependencies": {
     "dotenv": "^8.0.0",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "mongoose": "^5.6.9"
   }
 }
